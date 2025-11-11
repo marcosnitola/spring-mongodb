@@ -28,7 +28,7 @@ public class ClienteController {
 	}
 
 	@GetMapping("/{id}")
-	public Cliente obtenerPorId(@PathVariable Long id){
+	public Cliente obtenerPorId(@PathVariable String id){
 		return service.buscarPorId(id);
 	}
 
@@ -38,13 +38,13 @@ public class ClienteController {
 	}
 
 	@PutMapping("/{id}")
-	public Cliente actualizar(@PathVariable Long id, @RequestBody Cliente cliente){
+	public Cliente actualizar(@PathVariable String id, @RequestBody Cliente cliente){
 		cliente.setId(id);
 		return service.guardar(cliente);
 	}
 
 	@DeleteMapping("/{id}")
-	public void eliminar(@PathVariable Long id){
+	public void eliminar(@PathVariable String id){
 		service.eliminar(id);
 	}
 }

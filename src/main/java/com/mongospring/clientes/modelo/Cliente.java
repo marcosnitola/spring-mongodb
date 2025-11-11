@@ -15,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Cliente{
 	@Id
-	private Long id;
+	private String id;
 	private String nombre;
 	private String correo;
 	private String telefono;
