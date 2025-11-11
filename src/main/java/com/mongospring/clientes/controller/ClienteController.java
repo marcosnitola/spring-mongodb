@@ -1,0 +1,50 @@
+package com.mongospring.clientes.controller;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.mongospring.clientes.modelo.Cliente;
+import com.mongospring.clientes.service.ClienteService;
+
+import lombok.AllArgsConstructor;
+
+@RestController
+@RequestMapping("/api/clientes")
+@AllArgsConstructor
+public class ClienteController {
+	private final ClienteService service;
+
+	@GetMapping
+	public List<Cliente> listarTodos(){
+		return service.listar();
+	}
+
+	@GetMapping("/{id}")
+	public Cliente obtenerPorId(@PathVariable Long id){
+		return service.buscarPorId(id);
+	}
+
+	@PostMapping
+	public Cliente crear(@RequestBody Cliente cliente){
+		return service.guardar(cliente);
+	}
+
+	@PutMapping("/{id}")
+	public Cliente actualizar(@PathVariable Long id, @RequestBody Cliente cliente){
+		cliente.setId(id);
+		return service.guardar(cliente);
+	}
+
+	@DeleteMapping("/{id}")
+	public void eliminar(@PathVariable Long id){
+		service.eliminar(id);
+	}
+}
